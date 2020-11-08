@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 class MainClass {
   public static void Main (string[] args) {
-    string continuar="S", marca;
+    string marca;
+    char continuar = 'S';
     double consumo;
     Carro aut = new Carro("TESTE", 0);
     List<Carro> listaCarros = new List<Carro>();
 
-    while (continuar=="S"){
+    while (continuar=='S'){
       Console.WriteLine("MARCA DO CARRO >>");
       marca = Console.ReadLine();
 
@@ -31,8 +32,24 @@ class MainClass {
       }
       while(teste_km);
 
-      Console.WriteLine("CONTINUAR? S/N");
-      continuar = Console.ReadLine();
+      bool teste_lista = true;
+      do
+      {
+        try
+        {
+          Console.WriteLine("CONTINUAR? S/N");
+          continuar = char.Parse(Console.ReadLine().ToUpper());
+          teste_lista = false;
+        }
+        catch (FormatException)
+        {
+          Console.WriteLine();
+          Console.WriteLine("Dados inválidos favor inserir novamente!");
+          teste_lista = true;          
+        }
+      }
+      while(teste_lista);
+
     }
 
     Carro menor_consumo = listaCarros[0];
